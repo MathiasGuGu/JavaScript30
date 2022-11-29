@@ -62,13 +62,43 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
     }
-
+    .second-hand {
+      rotate: 60deg;
+      background-color: antiquewhite;
+    }
+    .min-hand {
+      background-color: red;
+      rotate: 100deg;
+    }
   </style>
 
   <script>
 
+    const minute_hand = document.querySelector(".min-hand")
+    const hour_hand = document.querySelector(".hour-hand")
+    const seconds_hand = document.querySelector(".second-hand")
 
+    const seconds_in_hour = 60 * 60;
+    const seconds_in_minute = 60;
+    const seconds_in_12_hours = 60 * 60 * 12
+    const minute_rotation = 360 / seconds_in_minute
+    const seconds_rotation = 360 / seconds_in_hour
+    const hour_rotation = 360 / seconds_in_12_hours
+
+    let curr_hour_rotation = 0;
+    let curr_minute_rotation = 0;
+    let curr_second_rotation = 0;
+
+    setInterval(() => {
+      curr_second_rotation += seconds_rotation;
+      curr_minute_rotation += minute_rotation;
+      curr_hour_rotation += hour_rotation;
+      seconds_hand.style.transform = `rotate(${curr_second_rotation}deg)`;
+      hour_hand.style.transform = `rotate(${curr_hour_rotation}deg)`;
+      minute_hand.style.transform = `rotate(${curr_minute_rotation}deg)`;
+    }, 1000)
   </script>
 </body>
 </html>
